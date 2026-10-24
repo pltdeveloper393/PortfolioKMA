@@ -29,9 +29,10 @@ export const en: Content = {
     label: 'About',
     title: 'I build applications that are easy to maintain.',
     paragraphs: [
-      "I'm a 4th-year student at the College of Business and Law, majoring in Software Development and Maintenance for Information Systems.",
-      "I build web and desktop applications: from a prototype and UI to backend and packaging. I work with Java, TypeScript/JavaScript, Node.js, Next.js, SQL and Git. I'm also interested in software maintenance, user support and documentation.",
-      'I like projects that stay understandable: clear structure, readable code, proper documentation. So I aim for more than “it works” — I aim for “it can be maintained”.',
+      "I'm a 4th-year student at the College of Business and Law, majoring in Software Development and Maintenance for Information Systems. Alongside my studies, I work on my own projects and pick up new technologies.",
+      'I prefer frontend and backend development. I often work on feature and interface design.',
+      "I value clean, reliable code; I pay a lot of attention to the design phase, because a weak foundation is the most fragile part if you get it wrong.",
+      "Outside of my studies, I keep learning new technologies and approaches, and I enjoy building and configuring Minecraft servers in Java.",
     ],
     facts: [
       { label: 'Education', value: '4th year · graduating 2027' },
