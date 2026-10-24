@@ -163,22 +163,23 @@ export const ru: Content = {
       portfolio: {
         category: 'Сайт · React + TypeScript',
         summary:
-          'Этот сайт: дизайн-система, RU/EN, доступность и будущая 3D-орбита.',
+          'Этот сайт: дизайн-система, RU/EN, доступность и аккуратные анимации.',
         task: 'Собрать личное портфолио, которое показывает проекты и подход к работе.',
         solution:
-          'React + TypeScript + Vite, кастомная дизайн-система на CSS, GitHub Pages; 3D-орбита на R3F — следующий этап.',
+          'React + TypeScript + Vite, кастомная дизайн-система на CSS, Motion для анимаций, GitHub Pages.',
         role: 'Дизайн и разработка',
         bullets: [
           'Спроектировал визуальный язык на основе резюме.',
           'Собрал адаптивный интерфейс и переключение RU/EN.',
+          'Добавил анимации, доступность и мобильную версию.',
           'Настроил сборку и деплой на GitHub Pages.',
         ],
-        result: 'В разработке; 3D-орбита — следующий этап.',
-        status: 'В разработке',
+        result: 'Опубликован на GitHub Pages; проект продолжает развиваться.',
+        status: 'Опубликован',
         links: [
           {
             label: 'GitHub',
-            href: 'https://github.com/pltdeveloper393/portfolio',
+            href: 'https://github.com/pltdeveloper393/PortfolioKMA',
           },
         ],
       },

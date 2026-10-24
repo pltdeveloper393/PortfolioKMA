@@ -31,9 +31,9 @@ export const en: Content = {
     title: 'I build applications that are easy to maintain.',
     paragraphs: [
       "I'm a 4th-year student at the College of Business and Law, majoring in Software Development and Maintenance for Information Systems. Alongside my studies, I work on my own projects and pick up new technologies.",
-      'I prefer frontend and backend development. I often work on feature and interface design.',
-      "I value clean, reliable code; I pay a lot of attention to the design phase, because a weak foundation is the most fragile part if you get it wrong.",
-      "Outside of my studies, I keep learning new technologies and approaches, and I enjoy building and configuring Minecraft servers in Java.",
+      'I focus on frontend and backend development, and I often work on feature and interface design.',
+      'I value clean, reliable code and pay close attention to the design phase: a weak foundation is the hardest thing to fix later.',
+      'Outside my studies, I keep learning new technologies and approaches, and I enjoy building and configuring Minecraft servers in Java.',
     ],
     facts: [
       { label: 'Education', value: '4th year · graduating 2027' },
@@ -161,22 +161,23 @@ export const en: Content = {
       },
       portfolio: {
         category: 'Website · React + TypeScript',
-        summary: 'This site: design system, RU/EN, accessibility and a future 3D orbit.',
+        summary: 'This site: design system, RU/EN, accessibility and polished animations.',
         task: 'Build a personal portfolio that shows projects and approach.',
         solution:
-          'React + TypeScript + Vite, a custom CSS design system, GitHub Pages; a R3F 3D orbit is the next step.',
+          'React + TypeScript + Vite, a custom CSS design system, Motion for animations, GitHub Pages.',
         role: 'Design and development',
         bullets: [
           'Created the visual language based on the resume.',
           'Built the responsive interface and RU/EN switching.',
+          'Added animations, accessibility and the mobile layout.',
           'Set up the build and GitHub Pages deployment.',
         ],
-        result: 'In development; the 3D orbit is the next step.',
-        status: 'In development',
+        result: 'Published on GitHub Pages; the project keeps evolving.',
+        status: 'Published',
         links: [
           {
             label: 'GitHub',
-            href: 'https://github.com/pltdeveloper393/portfolio',
+            href: 'https://github.com/pltdeveloper393/PortfolioKMA',
           },
         ],
       },
