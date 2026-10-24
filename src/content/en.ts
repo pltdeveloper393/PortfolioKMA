@@ -49,6 +49,9 @@ export const en: Content = {
       'Academic and personal work: web, desktop, team development. Private repositories are available on request.',
     viewCase: 'View case study',
     close: 'Close',
+    viewOrbit: 'Orbit',
+    viewList: 'List',
+    hint: 'Drag to rotate · hover to pause',
     meta: {
       role: 'Role',
       stack: 'Stack',

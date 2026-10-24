@@ -63,6 +63,9 @@ export type Content = {
     lead: string;
     viewCase: string;
     close: string;
+    viewOrbit: string;
+    viewList: string;
+    hint: string;
     meta: {
       role: string;
       stack: string;
