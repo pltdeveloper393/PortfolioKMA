@@ -2,7 +2,7 @@ import type { Content } from './types';
 
 export const en: Content = {
   meta: {
-    title: 'Matvey Krasnovsky — web & desktop developer',
+    title: 'Matvey Andreevich Krasnovsky — web & desktop developer',
     description:
       'Portfolio of Matvey Krasnovsky: web and desktop applications, backend, software maintenance.',
   },
@@ -15,8 +15,9 @@ export const en: Content = {
   },
   hero: {
     eyebrow: 'Portfolio · 2026',
-    name: 'Matvey Krasnovsky',
-    orbMark: 'MK',
+    surname: 'Krasnovsky',
+    name: 'Matvey Andreevich',
+    orbMark: 'KMA',
     role: 'Web & desktop developer',
     tagline:
       '4th-year student. Java, TypeScript, Node.js. I build applications and care about software maintenance.',
@@ -49,9 +50,6 @@ export const en: Content = {
       'Academic and personal work: web, desktop, team development. Private repositories are available on request.',
     viewCase: 'View case study',
     close: 'Close',
-    viewOrbit: 'Orbit',
-    viewList: 'List',
-    hint: 'Drag to rotate · hover to pause',
     meta: {
       role: 'Role',
       stack: 'Stack',
@@ -295,9 +293,13 @@ export const en: Content = {
     resume: 'Resume',
     status: 'Open to internships',
   },
+  download: {
+    title: 'Downloading resume',
+    subtitle: 'The file will be saved to your downloads',
+  },
   footer: {
     madeWith: 'Built with React + TypeScript',
     source: 'Source code',
-    rights: '© 2026 Matvey Krasnovsky',
+    rights: '© 2026 Matvey Andreevich Krasnovsky',
   },
 };

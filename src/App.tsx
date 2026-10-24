@@ -1,5 +1,6 @@
 import About from './components/About';
 import Contact from './components/Contact';
+import DownloadToast from './components/DownloadToast';
 import Education from './components/Education';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -21,6 +22,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <DownloadToast />
     </LanguageProvider>
   );
 }

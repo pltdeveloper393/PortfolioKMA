@@ -9,6 +9,7 @@ export default function Hero() {
       <div className="container hero__grid">
         <div className="hero__copy">
           <p className="eyebrow">{content.hero.eyebrow}</p>
+          <p className="hero__surname">{content.hero.surname}</p>
           <h1 className="hero__name">{content.hero.name}</h1>
           <p className="hero__role">{content.hero.role}</p>
           <p className="hero__tagline">{content.hero.tagline}</p>

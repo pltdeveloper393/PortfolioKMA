@@ -16,7 +16,7 @@ export default function Header() {
             <span className="brand__mark" aria-hidden="true">
               {content.hero.orbMark}
             </span>
-            <span className="brand__name">{content.hero.name}</span>
+            <span className="brand__name">{content.hero.surname}</span>
           </a>
 
           <nav className="site-nav" aria-label="Main navigation">

@@ -42,6 +42,7 @@ export type Content = {
   };
   hero: {
     eyebrow: string;
+    surname: string;
     name: string;
     orbMark: string;
     role: string;
@@ -63,9 +64,6 @@ export type Content = {
     lead: string;
     viewCase: string;
     close: string;
-    viewOrbit: string;
-    viewList: string;
-    hint: string;
     meta: {
       role: string;
       stack: string;
@@ -115,6 +113,10 @@ export type Content = {
     github: string;
     resume: string;
     status: string;
+  };
+  download: {
+    title: string;
+    subtitle: string;
   };
   footer: {
     madeWith: string;
