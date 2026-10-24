@@ -413,8 +413,18 @@ svg {
   }
 }
 
+@property --tag-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .orb__tag {
+  --radius: 190px;
+  --tag-angle: var(--base-angle);
   position: absolute;
+  top: 50%;
+  left: 50%;
   z-index: 2;
   padding: 6px 10px;
   border: 1px solid var(--line);
@@ -424,36 +434,57 @@ svg {
   color: var(--tan-deep);
   font-family: var(--font-mono);
   font-size: 11px;
+  white-space: nowrap;
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--tag-angle))
+    translateX(var(--radius))
+    rotate(calc(-1 * var(--tag-angle)));
+  animation: tag-orbit 18s ease-in-out infinite alternate;
 }
 
 .orb__tag--1 {
-  top: 6%;
-  left: 12%;
+  --base-angle: 0deg;
+  animation-duration: 18s;
 }
 
 .orb__tag--2 {
-  top: 18%;
-  right: -4%;
+  --base-angle: 60deg;
+  animation-duration: 22s;
+  animation-delay: -4s;
 }
 
 .orb__tag--3 {
-  top: 48%;
-  right: -10%;
+  --base-angle: 120deg;
+  animation-duration: 16s;
+  animation-delay: -7s;
 }
 
 .orb__tag--4 {
-  right: 4%;
-  bottom: 12%;
+  --base-angle: 180deg;
+  animation-duration: 20s;
+  animation-delay: -2s;
 }
 
 .orb__tag--5 {
-  bottom: 2%;
-  left: 18%;
+  --base-angle: 240deg;
+  animation-duration: 24s;
+  animation-delay: -9s;
 }
 
 .orb__tag--6 {
-  top: 44%;
-  left: -10%;
+  --base-angle: 300deg;
+  animation-duration: 17s;
+  animation-delay: -5s;
+}
+
+@keyframes tag-orbit {
+  from {
+    --tag-angle: calc(var(--base-angle) - 12deg);
+  }
+  to {
+    --tag-angle: calc(var(--base-angle) + 12deg);
+  }
 }
 
 @keyframes orb-float {
@@ -1150,6 +1181,10 @@ svg {
 
   .hero__orb {
     min-height: 340px;
+  }
+
+  .orb__tag {
+    --radius: 135px;
   }
 
   .about__grid {
