@@ -20,9 +20,7 @@ export default function Hero() {
             <a
               className="button button--ghost"
               href={SITE.resumePdf}
-              download
-              target="_blank"
-              rel="noreferrer"
+              download={SITE.resumeFileName}
             >
               {content.hero.ctaResume}
             </a>

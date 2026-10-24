@@ -35,13 +35,11 @@ export default function Contact() {
           <a
             className="contact__link"
             href={SITE.resumePdf}
-            download
-            target="_blank"
-            rel="noreferrer"
+            download={SITE.resumeFileName}
           >
             <span>{contact.resume}</span>
             <strong>
-              PDF <span aria-hidden="true">↗</span>
+              PDF <span aria-hidden="true">↓</span>
             </strong>
           </a>
         </div>

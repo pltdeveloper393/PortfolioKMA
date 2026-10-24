@@ -41,9 +41,7 @@ export default function Header() {
             <a
               className="button button--small"
               href={SITE.resumePdf}
-              download
-              target="_blank"
-              rel="noreferrer"
+              download={SITE.resumeFileName}
             >
               {content.nav.resume}
             </a>
