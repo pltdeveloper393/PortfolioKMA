@@ -1144,7 +1144,8 @@ svg {
   }
 
   .hero__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    gap: 32px;
   }
 
   .hero__orb {
@@ -1180,6 +1181,7 @@ svg {
   }
 
   .hero__grid {
+    grid-template-columns: 1fr;
     gap: 0;
   }
 
