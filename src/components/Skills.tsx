@@ -1,4 +1,7 @@
+import { motion } from 'motion/react';
 import { useLanguage } from '../i18n/LanguageContext';
+import SectionHead from './SectionHead';
+import { fadeRise, stagger } from '../lib/variants';
 
 export default function Skills() {
   const { content, lang } = useLanguage();
@@ -7,29 +10,36 @@ export default function Skills() {
   return (
     <section className="section skills" id="skills">
       <div className="container">
-        <div className="section__head">
-          <p className="eyebrow">{content.skills.label}</p>
-          <h2 className="section__title">{content.skills.title}</h2>
-          <p className="section__lead">{content.skills.lead}</p>
-        </div>
+        <SectionHead
+          eyebrow={content.skills.label}
+          title={content.skills.title}
+          lead={content.skills.lead}
+        />
 
-        <div className="skills__grid">
-          {content.skills.groups.map((group) => (
-            <div className="skill-group" key={group.title}>
+        <motion.div
+          className="skills__grid"
+          variants={stagger(0.15)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+        >
+          {content.skills.groups.map((group, index) => (
+            <motion.div className="skill-group" key={index} variants={fadeRise}>
               <h3 className="skill-group__title">{group.title}</h3>
               <ul className="chips">
                 {group.items.map((item) => (
                   <li
                     className={`chip chip--${item.level}`}
+                    data-tip={levels[item.level]}
                     key={item.name}
                   >
                     {item.name}
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div
           className="skills__legend"

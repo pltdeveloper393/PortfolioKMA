@@ -7,23 +7,61 @@ type ProjectModalProps = {
   onClose: () => void;
 };
 
+const FOCUSABLE =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const { content } = useLanguage();
   const item = content.projects.items[project.id];
   const closeRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    const previousOverflow = document.body.style.overflow;
+    const previousPadding = document.body.style.paddingRight;
+
+    document.body.style.overflow = 'hidden';
+    if (scrollbar > 0) {
+      document.body.style.paddingRight = `${scrollbar}px`;
+    }
+    closeRef.current?.focus();
+
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        onClose();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const panel = panelRef.current;
+      if (!panel) return;
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>(FOCUSABLE),
+      ).filter((element) => element.offsetParent !== null);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
 
     document.addEventListener('keydown', onKeyDown);
-    document.body.style.overflow = 'hidden';
-    closeRef.current?.focus();
 
     return () => {
       document.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPadding;
     };
   }, [onClose]);
 
@@ -36,6 +74,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       }}
     >
       <div
+        ref={panelRef}
         className="modal__panel"
         role="dialog"
         aria-modal="true"

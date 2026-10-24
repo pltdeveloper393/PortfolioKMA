@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n/LanguageContext';
+import SectionHead from './SectionHead';
 
 export default function Education() {
   const { content } = useLanguage();
@@ -7,11 +8,11 @@ export default function Education() {
   return (
     <section className="section education" id="education">
       <div className="container">
-        <div className="section__head">
-          <p className="eyebrow">{education.label}</p>
-          <h2 className="section__title">{education.title}</h2>
-          <p className="section__lead">{education.lead}</p>
-        </div>
+        <SectionHead
+          eyebrow={education.label}
+          title={education.title}
+          lead={education.lead}
+        />
 
         <div className="education__card">
           <div className="education__top">

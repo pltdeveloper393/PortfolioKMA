@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function DownloadToast() {
@@ -32,29 +33,35 @@ export default function DownloadToast() {
     };
   }, []);
 
-  if (!visible) return null;
-
   return (
-    <div
-      className="download-toast"
-      role="status"
-      aria-live="polite"
-      key={runId}
-    >
-      <span className="download-toast__icon" aria-hidden="true">
-        ↓
-      </span>
-      <span className="download-toast__text">
-        <strong className="download-toast__title">
-          {content.download.title}
-        </strong>
-        <span className="download-toast__subtitle">
-          {content.download.subtitle}
-        </span>
-      </span>
-      <span className="download-toast__bar" aria-hidden="true">
-        <span />
-      </span>
-    </div>
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          className="download-toast"
+          role="status"
+          aria-live="polite"
+          key={runId}
+          initial={{ opacity: 0, y: 14, x: '-50%' }}
+          animate={{ opacity: 1, y: 0, x: '-50%' }}
+          exit={{ opacity: 0, y: 14, x: '-50%' }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="download-toast__icon" aria-hidden="true">
+            ↓
+          </span>
+          <span className="download-toast__text">
+            <strong className="download-toast__title">
+              {content.download.title}
+            </strong>
+            <span className="download-toast__subtitle">
+              {content.download.subtitle}
+            </span>
+          </span>
+          <span className="download-toast__bar" aria-hidden="true">
+            <span />
+          </span>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

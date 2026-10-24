@@ -118,6 +118,14 @@ svg {
   border-bottom: 1px solid var(--line);
   background: rgba(247, 240, 231, 0.86);
   backdrop-filter: blur(16px);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.site-header.is-scrolled {
+  background: rgba(247, 240, 231, 0.96);
+  box-shadow: 0 10px 30px rgba(43, 38, 34, 0.06);
 }
 
 .site-header__inner {
@@ -126,6 +134,16 @@ svg {
   justify-content: space-between;
   gap: 24px;
   min-height: 72px;
+}
+
+.scroll-progress {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--tan-deep);
+  transform-origin: 0 50%;
 }
 
 .brand {
@@ -160,17 +178,50 @@ svg {
 
 .site-nav {
   display: flex;
+  align-items: center;
   gap: 26px;
   font-size: 13px;
   color: var(--muted);
 }
 
 .site-nav a {
-  transition: color 0.2s ease;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  transform-origin: center;
+  transition:
+    color 0.2s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--tan-deep);
+  content: '';
+  transform: scaleX(0);
+  transform-origin: right 50%;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav a:hover,
+.site-nav a.is-active {
+  color: var(--ink);
 }
 
 .site-nav a:hover {
-  color: var(--ink);
+  transform: scale(1.06);
+}
+
+.site-nav a:hover::after,
+.site-nav a.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left 50%;
 }
 
 .site-header__actions {
@@ -240,6 +291,50 @@ svg {
   font-size: 12px;
 }
 
+/* ---------- Magnetic buttons ---------- */
+.magnetic {
+  display: inline-flex;
+}
+
+.button__label {
+  display: inline-grid;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.button__label > span {
+  grid-area: 1 / 1;
+  display: block;
+  transition:
+    opacity 0.28s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.button__label > span + span {
+  opacity: 0;
+  transform: translateY(60%);
+}
+
+.button:hover .button__label > span:first-child,
+.button:focus-visible .button__label > span:first-child {
+  opacity: 0;
+  transform: translateY(-60%);
+}
+
+.button:hover .button__label > span + span,
+.button:focus-visible .button__label > span + span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.lang-toggle:active {
+  transform: scale(0.96);
+}
+
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -267,19 +362,19 @@ svg {
   gap: 48px;
 }
 
-.hero__surname {
-  margin-top: 18px;
-  color: var(--tan-mid);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.eyebrow__sep {
+  margin-inline: 0.15em;
+  color: var(--tan);
+}
+
+.hero__surname-inline {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .hero__name {
   max-width: 10ch;
-  margin: 6px 0 20px;
+  margin: 14px 0 20px;
   font-size: clamp(3.2rem, 7vw, 6.4rem);
   font-weight: 600;
   line-height: 0.92;
@@ -317,11 +412,52 @@ svg {
 }
 
 .status__dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--olive);
   box-shadow: 0 0 0 4px rgba(124, 133, 100, 0.14);
+}
+
+.status__dot::before,
+.status__dot::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--olive);
+  content: '';
+  animation: status-pulse 2.4s ease-out infinite;
+}
+
+.status__dot::after {
+  animation-delay: 1.2s;
+}
+
+@keyframes status-pulse {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(3.4);
+  }
+}
+
+/* ---------- Word-by-word reveal ---------- */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.1em 0 0.12em;
+  margin: -0.1em 0 -0.12em;
+  vertical-align: bottom;
+  line-height: 1;
+}
+
+.word {
+  display: inline-block;
+  will-change: transform;
 }
 
 .hero__orb {
@@ -365,6 +501,13 @@ svg {
   font-family: var(--font-mono);
   font-size: clamp(2rem, 5vw, 4rem);
   letter-spacing: 0.08em;
+}
+
+/* Слой скролл-параллакса орба */
+.orb-drift {
+  display: grid;
+  width: 100%;
+  place-items: center;
 }
 
 .orb__ring {
@@ -599,8 +742,14 @@ svg {
   gap: 20px;
 }
 
+/* Обёртка reveal: растягивает карточку на высоту ряда */
+.projects__grid-item {
+  display: flex;
+}
+
 .project-card {
   display: flex;
+  flex: 1;
   flex-direction: column;
   overflow: hidden;
   padding: 0;
@@ -609,16 +758,36 @@ svg {
   background: var(--white);
   text-align: left;
   cursor: pointer;
+  transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition:
-    transform 0.25s ease,
+    transform 0.25s ease-out,
     box-shadow 0.25s ease,
     border-color 0.25s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
+  transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    translateY(-4px);
   border-color: var(--tan);
   box-shadow: var(--shadow);
+}
+
+.project-card__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.38),
+    transparent 62%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-card__glare {
+  opacity: 1;
 }
 
 .project-card__visual {
@@ -724,11 +893,22 @@ svg {
 }
 
 .project-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   margin-top: auto;
   padding-top: 12px;
   color: var(--tan-deep);
   font-size: 12px;
   font-weight: 600;
+}
+
+.project-card__cta > span:last-child {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card:hover .project-card__cta > span:last-child {
+  transform: translateX(5px);
 }
 
 .project-card--tan {
@@ -779,6 +959,7 @@ svg {
   place-items: center;
   background: rgba(33, 29, 26, 0.62);
   backdrop-filter: blur(6px);
+  overscroll-behavior: contain;
 }
 
 .modal__panel {
@@ -786,6 +967,8 @@ svg {
   width: min(920px, 100%);
   max-height: min(88vh, 900px);
   overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--line);
   border-radius: 24px;
   background: var(--paper);
@@ -970,12 +1153,49 @@ svg {
 }
 
 .chip {
+  position: relative;
   padding: 7px 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 11px;
   line-height: 1;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.chip:hover {
+  border-color: var(--tan);
+  transform: translateY(-2px);
+}
+
+/* Подсказка уровня навыка */
+.chip[data-tip]::after {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 50%;
+  z-index: 10;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--espresso);
+  color: var(--paper);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  content: attr(data-tip);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chip[data-tip]:hover::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .chip--core {
@@ -1119,11 +1339,32 @@ svg {
 }
 
 .contact__link {
+  position: relative;
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 20px 0;
+  padding: 20px 8px;
   border-bottom: 1px solid rgba(247, 240, 231, 0.18);
+  transition: padding 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact__link::before {
+  position: absolute;
+  inset: 0;
+  background: rgba(247, 240, 231, 0.05);
+  content: '';
+  pointer-events: none;
+  transform: scaleY(0);
+  transform-origin: bottom 50%;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact__link:hover::before {
+  transform: scaleY(1);
+}
+
+.contact__link:hover {
+  padding: 20px 16px;
 }
 
 .contact__link span {
@@ -1135,13 +1376,28 @@ svg {
 }
 
 .contact__link strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 500;
   text-align: right;
   transition: color 0.2s ease;
 }
 
+.contact__link strong .arrow {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .contact__link:hover strong {
   color: var(--tan);
+}
+
+.contact__link:hover strong .arrow--ne {
+  transform: translate(4px, -3px);
+}
+
+.contact__link:hover strong .arrow--s {
+  transform: translateY(3px);
 }
 
 /* ---------- Footer ---------- */
@@ -1357,6 +1613,11 @@ svg {
     display: none;
   }
 
+  .hero .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
   .hero__copy {
     max-width: 70%;
   }
@@ -1388,6 +1649,10 @@ svg {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+
+  .word {
+    transform: none !important;
+  }
 }
 
 /* ---------- Download toast ---------- */
@@ -1406,8 +1671,6 @@ svg {
   background: var(--espresso);
   color: var(--paper);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-  transform: translateX(-50%);
-  animation: toast-in 0.3s ease;
 }
 
 .download-toast__icon {
@@ -1456,17 +1719,6 @@ svg {
   background: var(--tan);
   transform-origin: left;
   animation: download-progress 2.8s ease-out forwards;
-}
-
-@keyframes toast-in {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 10px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
 }
 
 @keyframes download-progress {
