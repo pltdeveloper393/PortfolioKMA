@@ -82,7 +82,6 @@ export type Content = {
   skills: {
     label: string;
     title: string;
-    lead: string;
     levels: {
       core: string;
       experience: string;
