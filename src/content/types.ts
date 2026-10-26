@@ -88,6 +88,29 @@ export type Content = {
       experience: string;
       basic: string;
     };
+    levelHints: {
+      core: string;
+      experience: string;
+      basic: string;
+    };
+    meta: {
+      skills: string;
+      categories: string;
+    };
+    counts: {
+      core: string;
+      experience: string;
+      basic: string;
+    };
+    labels: {
+      categories: string;
+      levels: string;
+      previousPage: string;
+      nextPage: string;
+    };
+    panel: {
+      records: string;
+    };
     groups: {
       title: string;
       items: { name: string; level: SkillLevel }[];

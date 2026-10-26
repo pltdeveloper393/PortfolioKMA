@@ -195,6 +195,29 @@ export const ru: Content = {
       experience: 'опыт',
       basic: 'базовый',
     },
+    levelHints: {
+      core: 'использую постоянно',
+      experience: 'применял в проектах',
+      basic: 'знаю основы',
+    },
+    meta: {
+      skills: 'навык|навыка|навыков',
+      categories: 'категория|категории|категорий',
+    },
+    counts: {
+      core: 'основных',
+      experience: 'опыта',
+      basic: 'базовых',
+    },
+    labels: {
+      categories: 'Категории',
+      levels: 'Уровни',
+      previousPage: 'Предыдущая страница',
+      nextPage: 'Следующая страница',
+    },
+    panel: {
+      records: 'запись|записи|записей',
+    },
     groups: [
       {
         title: 'Языки',

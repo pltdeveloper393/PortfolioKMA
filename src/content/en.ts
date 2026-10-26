@@ -193,6 +193,29 @@ export const en: Content = {
       experience: 'experience',
       basic: 'basic',
     },
+    levelHints: {
+      core: 'used regularly',
+      experience: 'used in projects',
+      basic: 'know the basics',
+    },
+    meta: {
+      skills: 'skill|skills',
+      categories: 'category|categories',
+    },
+    counts: {
+      core: 'core',
+      experience: 'experience',
+      basic: 'basic',
+    },
+    labels: {
+      categories: 'Categories',
+      levels: 'Levels',
+      previousPage: 'Previous page',
+      nextPage: 'Next page',
+    },
+    panel: {
+      records: 'entry|entries',
+    },
     groups: [
       {
         title: 'Languages',
